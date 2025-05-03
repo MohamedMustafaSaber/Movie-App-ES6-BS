@@ -142,7 +142,16 @@ document.addEventListener('DOMContentLoaded',function(){
         render(people, 'people-list');
     }
     
-
+    function search(){
+        var searchWord = document.getElementById('search').value.toLowerCase();
+        var filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(searchWord));
+        var filteredTV = tvShows.filter(tvShow => tvShow.title.toLowerCase().includes(searchWord));
+        var filteredPeople = people.filter(person => person.title.toLowerCase().includes(searchWord));
+        render(filteredMovies, 'movie-list');
+        render(filteredTV, 'tv-list');
+        render(filteredPeople, 'People-list');
+    }
+    document.getElementById('search').addEventListener('input',search);
     fetchMovies();
     fetchTvShows();
     fetchPeople();
