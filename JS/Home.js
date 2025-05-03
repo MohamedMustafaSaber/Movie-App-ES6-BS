@@ -3,7 +3,7 @@ const dummyUser = {
     username: "mohamed",
     password: "123",
     favorites: {
-        movies: [],
+        movie: [],
         tvShows: [],
         people: []
     }
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded',function(){
             }
         });
         const data = await response.json();
-        const people = data.results
+        people = data.results
         .filter(person =>  person.profile_path ).map(person => ({
             id: person.id,
             title: person.name,
@@ -87,11 +87,10 @@ document.addEventListener('DOMContentLoaded',function(){
             if (currentUser) {
                 currentUser = JSON.parse(currentUser); 
                 const type = containerID.replace('-list', '');
-                isFavorited = currentUser.favorites?.[type]?.some(fav => fav.id === item.id);
+                isFavorited = currentUser.favorites?.[type]?.includes(item.id);
             }
             const iconClass = isFavorited ? 'fas fa-heart text-danger' : 'fas fa-heart';
-
-
+            
             card.innerHTML = `
                 <img src="${item.img}" alt="${item.title}" class="img-fluid">
                 <div class="card-rating">${Math.round(item.rating * 10) / 10}</div>
@@ -103,7 +102,7 @@ document.addEventListener('DOMContentLoaded',function(){
             `;
 
             let favoriteIcon = card.querySelector('.favorite-icon');
-            favoriteIcon.addEventListener('click', () => toggleFavorite(item, containerID.replace('-list', '')));
+            favoriteIcon.addEventListener('click', () => toggleFavorite(item.id, containerID.replace('-list', '')));
 
             column.appendChild(card)
             container.appendChild(column);
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
     }
 
-    function toggleFavorite(item, type) {
+    function toggleFavorite(itemID, type) {
         let currentUser = JSON.parse(localStorage.getItem('currentUser'));
         if (!currentUser) {
             const toast = new bootstrap.Toast(document.getElementById('loginToast'));
@@ -125,17 +124,14 @@ document.addEventListener('DOMContentLoaded',function(){
         let userIndex = users.findIndex(user => user.Email === currentUser.Email);
         if (userIndex === -1) return;
     
-        // Ensure the favorites object and its category exist
-        if (!users[userIndex].favorites) users[userIndex].favorites = {};
-        if (!users[userIndex].favorites[type]) users[userIndex].favorites[type] = [];
     
         let favList = users[userIndex].favorites[type];
-        let exists = favList.find(fav => fav.id === item.id);
+        let exists = favList.find(fav => fav.id === itemID);
     
         if (exists) {
-            users[userIndex].favorites[type] = favList.filter(fav => fav.id !== item.id);
+            users[userIndex].favorites[type] = favList.filter(fav => fav.id !== itemID);
         } else {
-            users[userIndex].favorites[type].push(item);
+            users[userIndex].favorites[type].push(itemID);
         }
     
         localStorage.setItem('users', JSON.stringify(users));
