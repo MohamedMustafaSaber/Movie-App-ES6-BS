@@ -21,6 +21,18 @@ nav{
     font-size: 24px;
     font-family: 'Poppins', sans-serif;
 }
+.modal-content{
+    font-family: var(--main-font);
+}
+.modal-body{
+    background-color: var(--bg-color);
+    color: var(--font-color);
+}
+
+.modal-header{
+    background-color: var(--light-bg-color);
+}
+
 
 
 nav a {
@@ -155,3 +167,6 @@ section p{
     color: red;
 }
 
+.modal-header{
+    background-color: #12131c;;
+}
