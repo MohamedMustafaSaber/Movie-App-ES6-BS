@@ -107,11 +107,12 @@ document.addEventListener('DOMContentLoaded',function(){
             container.appendChild(column);
             card.addEventListener('click', (e) => {
                 if (!e.target.closest('.favorite-btn')) {
-                    fetchDetails(item.id,containerID.split('-')[0]);
-                    document.activeElement.blur();
-                    myModal.show();
-                  
-           }
+                    if (!e.target.closest('.favorite-icon')) {
+                        fetchDetails(item.id, containerID.split('-')[0]);
+                        document.activeElement.blur();
+                        myModal.show();
+                    }
+                }
         })
         });
 
@@ -151,7 +152,7 @@ document.addEventListener('DOMContentLoaded',function(){
         render(tvShows, 'tvShows-list');
         render(people, 'people-list');
     }
-    /*----------------------------------------------------------------------------------------- */
+
     async function fetchDetails(Id,type) {
         if(type=="tvShows"){
             type="tv";
@@ -181,10 +182,11 @@ document.addEventListener('DOMContentLoaded',function(){
             renderError();
         }
     }
+
     function renderDetails(data,type) {
         const detailsImage = document.getElementById('detailsImage');
         const detailsContent = document.getElementById('detailsContent');
-    
+        
         const image = document.createElement('img');
         image.src = `https://image.tmdb.org/t/p/w500${data.poster_path || data.profile_path}`;
         image.alt = data.title || data.name;
@@ -244,7 +246,6 @@ document.addEventListener('DOMContentLoaded',function(){
         return sentences.slice(0, count).join(' ');
     }
     
-    
     function renderError() {
         const detailsContent = document.getElementById('detailsContent');
         detailsContent.innerHTML = `
@@ -252,6 +253,7 @@ document.addEventListener('DOMContentLoaded',function(){
             <p class="overview">We couldn't load the details for this item. Please try again later.</p>
         `;
     }
+
     const myModal = new bootstrap.Modal(document.getElementById('myModal'));
     
 

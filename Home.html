@@ -66,25 +66,26 @@
             </div>
         </section>
     </div>
+
     <div class="modal modal-xl fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-content rounded rounded-4 shadow border-1 border-info ">
+                <div class="modal-header">
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <main class="detMain">
+                        <div class="detPage row">
+                            <div class="detPhoto col-md-6 mb-2 overflow-hidden text-center" id="detailsImage">
+                            </div>
+                            <div class="detCardContent p-2 col-md-6 d-flex flex-column align-items-start justify-content-center" id="detailsContent">
+                            </div>
+                        </div>
+                    </main>
+                </div>
             </div>
-            <div class="modal-body rounded-bottom-2">
-                <main class="detMain">
-                    <div class="detPage row">
-                      <div class="detPhoto col-lg-6 col-sm-12 mb-2 overflow-hidden text-center" id="detailsImage">
-                      </div>
-                      <div class="detCardContent p-2 col-lg-6 col-sm-12" id="detailsContent">
-                      </div>
-                    </div>
-                  </main>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <div class="toast-container position-fixed top-0 end-0 p-5 mt-5">
         <div id="loginToast" class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
