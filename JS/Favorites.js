@@ -63,6 +63,7 @@ function renderMovies(movies, containerID) {
         <div class="card-title">${movie.title}</div>`;
         column.appendChild(card)
         container.appendChild(column);
+        
     });
 }
 
