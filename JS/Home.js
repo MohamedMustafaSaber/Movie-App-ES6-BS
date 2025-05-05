@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 const dummyUser = {
     Email: "test@example.com",
     username: "mohamed",
@@ -280,4 +278,3 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 })
 
->>>>>>> Stashed changes
