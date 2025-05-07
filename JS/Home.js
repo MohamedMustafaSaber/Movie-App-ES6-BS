@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded',function(){
                     <i class="${iconClass}"></i>
                 </span>
                 <div class="card-title">${item.title}</div>
-                
             `;
             
             let favoriteIcon = card.querySelector('.favorite-icon');
@@ -135,10 +134,10 @@ document.addEventListener('DOMContentLoaded',function(){
     
     
         let favList = users[userIndex].favorites[type];
-        let exists = favList.find(fav => fav.id === itemID);
+        let exists = favList.includes(itemID);
     
         if (exists) {
-            users[userIndex].favorites[type] = favList.filter(fav => fav.id !== itemID);
+            users[userIndex].favorites[type] = favList.filter(fav => fav !== itemID);
         } else {
             users[userIndex].favorites[type].push(itemID);
         }
@@ -150,6 +149,7 @@ document.addEventListener('DOMContentLoaded',function(){
         render(tvShows, 'tvShows-list');
         render(people, 'people-list');
     }
+
     async function fetchDetails(Id,type) {
         if(type=="tvShows"){
             type="tv";
@@ -252,14 +252,15 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     const myModal = new bootstrap.Modal(document.getElementById('myModal'));
+
     function search(){
         var searchWord = document.getElementById('search').value.toLowerCase();
         var filteredMovies = movies.filter(movie => movie.title.toLowerCase().includes(searchWord));
         var filteredTV = tvShows.filter(tvShow => tvShow.title.toLowerCase().includes(searchWord));
         var filteredPeople = people.filter(person => person.title.toLowerCase().includes(searchWord));
         render(filteredMovies, 'movie-list');
-        render(filteredTV, 'tv-list');
-        render(filteredPeople, 'People-list');
+        render(filteredTV, 'tvShows-list');
+        render(filteredPeople, 'people-list');
     }
     document.getElementById('search').addEventListener('input',search);
     fetchMovies();
