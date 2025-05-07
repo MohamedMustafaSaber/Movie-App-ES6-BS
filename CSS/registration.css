@@ -1,0 +1,65 @@
+
+
+@import url('variables.css'); 
+
+body{
+    margin: 0;
+    font-family: var(--main-font);
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    padding-top: 80px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+/* NavBar Part */
+nav{
+    background-color: #12131c;
+}
+
+.logo {
+    color: var(--bg-transparent);
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+nav a {
+    color: var(--font-color);
+    text-decoration: none;
+    transition: all 1s ease;
+    padding: 5px 0;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+nav a:hover {
+    color: var(--light-bg-color) !important;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--light-bg-color);
+    transition: width 0.8s ease;
+}
+
+nav a:hover::after {
+    width: 100%;
+}
+
+
+logoutBtn{
+    color: var(--font-color);
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.logoutBtn:hover {
+    color: rgb(244, 82, 82) !important;
+}
