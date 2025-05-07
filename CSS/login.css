@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url('variables.css'); 
 
 body{
@@ -53,3 +54,22 @@ nav a:hover::after {
     width: 100%;
 }
 
+=======
+@import url('./variables.css');
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    
+    background-color: var(--bg-color);
+    color: var(--font-color);
+    font-family: var(--main-font);
+    overflow-y: auto;
+   
+}
+
+nav{
+    background: var(--bg-color);
+}
+>>>>>>> e5fdf8335bfa1bff6f4730d1c85b64f974a29a14
