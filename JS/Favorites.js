@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded',function(){
     let tvShows = [];
     let people = [];
     
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const currentUser = JSON.parse(sessionStorage.getItem("CurrentUser"));
     const favMovieIDs = currentUser.favorites.movie || [];
     const favTvIDs = currentUser.favorites.tvShows || [];
     const favPeopleIDs = currentUser.favorites.people || [];
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded',function(){
             let column = document.createElement('div');
             column.className = 'col-md-2';
     
-            let currentUser = localStorage.getItem('currentUser');
+            let currentUser = sessionStorage.getItem('CurrentUser');
     
             let card = document.createElement('div');
             card.className = 'card'; 
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     
     function toggleFavorite(itemID, type) {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(sessionStorage.getItem('CurrentUser'));
         if (!currentUser) {
             const toast = new bootstrap.Toast(document.getElementById('loginToast'));
             toast.show();
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded',function(){
         }
         
         
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('Users')) || [];
         let userIndex = users.findIndex(user => user.Email === currentUser.Email);
         if (userIndex === -1) return;
     
@@ -151,8 +151,8 @@ document.addEventListener('DOMContentLoaded',function(){
             users[userIndex].favorites[type].push(itemID);
         }
     
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+        localStorage.setItem('Users', JSON.stringify(users));
+        sessionStorage.setItem('CurrentUser', JSON.stringify(users[userIndex]));
         
         
         render(movies, 'movie-list');
@@ -275,6 +275,14 @@ document.addEventListener('DOMContentLoaded',function(){
     
     document.getElementById('search').addEventListener('input',search);
 
+    let logoutBtn=document.getElementById("logout");
+    logoutBtn.addEventListener("click",logout);
+    function logout()
+    {
+        sessionStorage.clear()
+        window.location.href="login.html"
+    }
+    
     getFavMovieDetails();
     getFavTvDetails();
     getFavPeopleDetails();

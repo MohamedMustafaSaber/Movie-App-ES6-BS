@@ -1,18 +1,3 @@
-const dummyUser = {
-    Email: "test@example.com",
-    username: "mohamed",
-    password: "123",
-    favorites: {
-        movie: [],
-        tvShows: [],
-        people: []
-    }
-};
-
-// Simulate a logged-in user
-localStorage.setItem("currentUser", JSON.stringify(dummyUser));
-localStorage.setItem("users", JSON.stringify([dummyUser]));
-
 document.addEventListener('DOMContentLoaded',function(){
     let movies = [];
     let tvShows = [];
@@ -78,16 +63,16 @@ document.addEventListener('DOMContentLoaded',function(){
             let column = document.createElement('div');
             column.className = 'col-md-2';
 
-            let currentUser = localStorage.getItem('currentUser');
+            let CurrentUser = sessionStorage.getItem('CurrentUser');
 
             let card = document.createElement('div');
             card.className = 'card'; 
 
             let isFavorited = false;
-            if (currentUser) {
-                currentUser = JSON.parse(currentUser); 
+            if (CurrentUser) {
+                CurrentUser = JSON.parse(CurrentUser); 
                 const type = containerID.replace('-list', '');
-                isFavorited = currentUser.favorites?.[type]?.includes(item.id);
+                isFavorited = CurrentUser.favorites?.[type]?.includes(item.id);
             }
             const iconClass = isFavorited ? 'fas fa-heart text-danger' : 'fas fa-heart';
             
@@ -119,8 +104,8 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     function toggleFavorite(itemID, type) {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        if (!currentUser) {
+        let CurrentUser = JSON.parse(sessionStorage.getItem('CurrentUser'));
+        if (!CurrentUser) {
             const toast = new bootstrap.Toast(document.getElementById('loginToast'));
             toast.show();
             return;
@@ -128,8 +113,8 @@ document.addEventListener('DOMContentLoaded',function(){
         
         
     
-        let users = JSON.parse(localStorage.getItem('users')) || [];
-        let userIndex = users.findIndex(user => user.Email === currentUser.Email);
+        let users = JSON.parse(localStorage.getItem('Users')) || [];
+        let userIndex = users.findIndex(user => user.Email === CurrentUser.Email);
         if (userIndex === -1) return;
     
     
@@ -142,8 +127,8 @@ document.addEventListener('DOMContentLoaded',function(){
             users[userIndex].favorites[type].push(itemID);
         }
     
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+        localStorage.setItem('Users', JSON.stringify(users));
+        sessionStorage.setItem('CurrentUser', JSON.stringify(users[userIndex]));
 
         render(movies, 'movie-list');
         render(tvShows, 'tvShows-list');
@@ -263,6 +248,14 @@ document.addEventListener('DOMContentLoaded',function(){
         render(filteredPeople, 'people-list');
     }
     document.getElementById('search').addEventListener('input',search);
+
+    let logoutBtn=document.getElementById("logout");
+    logoutBtn.addEventListener("click",logout);
+    function logout()
+    {
+        sessionStorage.clear()
+        window.location.href="login.html"
+    }
     fetchMovies();
     fetchTvShows();
     fetchPeople();

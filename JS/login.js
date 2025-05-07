@@ -29,7 +29,6 @@ function validation(e)
         else if(email.value)
             emailValid.classList.add("d-none");
 
-           
         if(!password.value)
             passValid.classList.remove("d-none");
         else if(password.value)

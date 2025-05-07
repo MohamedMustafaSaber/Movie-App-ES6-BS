@@ -52,8 +52,6 @@ function checkDub_User()
 {
     if(users.some(user=>user.Email===email.value))
     {
-        // console.log(user.Email)
-        // duplicateEmail.innerHTML="";
         duplicateEmail.innerHTML="This email is already registered!";
         duplicateEmail.style.color="red"
         return false;
@@ -80,18 +78,9 @@ function createUser()
         people: []};
     users.push(user);
     localStorage.setItem("Users",JSON.stringify(users));
-    // setcookies("Email",user.Email)
     window.location.href = "login.html";
-    // window.location.href="Home.html"
 
 
-}
-
-function setcookies(name,email,hours=3)
-{
-    let date = new Date();
-    date.setTime(date.getTime() + (hours*60*60*1000));
-    document.cookie=`${name}=${email}; expires=${date.toUTCString()}; path=/`;
 }
 
 
