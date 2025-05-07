@@ -10,8 +10,8 @@ const dummyUser = {
 };
 
 // Simulate a logged-in user
-localStorage.setItem("currentUser", JSON.stringify(dummyUser));
-localStorage.setItem("users", JSON.stringify([dummyUser]));
+// localStorage.setItem("currentUser", JSON.stringify(dummyUser));
+// localStorage.setItem("users", JSON.stringify([dummyUser]));
 
 document.addEventListener('DOMContentLoaded',function(){
     let movies = [];
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded',function(){
             let column = document.createElement('div');
             column.className = 'col-md-2';
 
-            let currentUser = localStorage.getItem('currentUser');
+            let currentUser = sessionStorage.getItem('CurrentUser');
 
             let card = document.createElement('div');
             card.className = 'card'; 
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded',function(){
     }
 
     function toggleFavorite(itemID, type) {
-        let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        let currentUser = JSON.parse(sessionStorage.getItem('CurrentUser'));
         if (!currentUser) {
             const toast = new bootstrap.Toast(document.getElementById('loginToast'));
             toast.show();
@@ -129,27 +129,31 @@ document.addEventListener('DOMContentLoaded',function(){
         
         
     
-        let users = JSON.parse(localStorage.getItem('users')) || [];
+        let users = JSON.parse(localStorage.getItem('Users')) || [];
         let userIndex = users.findIndex(user => user.Email === currentUser.Email);
         if (userIndex === -1) return;
     
     
         let favList = users[userIndex].favorites[type];
-        let exists = favList.find(fav => fav.id === itemID);
+        let exists = favList.find(fav => fav === itemID);
     
         if (exists) {
-            users[userIndex].favorites[type] = favList.filter(fav => fav.id !== itemID);
+            users[userIndex].favorites[type] = favList.filter(fav => fav != itemID);
         } else {
             users[userIndex].favorites[type].push(itemID);
         }
     
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('currentUser', JSON.stringify(users[userIndex]));
+        localStorage.setItem('Users', JSON.stringify(users));
+        sessionStorage.setItem('CurrentUser', JSON.stringify(users[userIndex]));
 
         render(movies, 'movie-list');
         render(tvShows, 'tvShows-list');
         render(people, 'people-list');
     }
+
+
+
+
     async function fetchDetails(Id,type) {
         if(type=="tvShows"){
             type="tv";

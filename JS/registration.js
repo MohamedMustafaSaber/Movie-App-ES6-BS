@@ -74,7 +74,10 @@ function createUser()
     user.Age=age.value;
     user.Email=email.value;
     user.Password=password.value;
-    user.favorites={};
+    user.favorites={
+        movie: [],
+        tvShows: [],
+        people: []};
     users.push(user);
     localStorage.setItem("Users",JSON.stringify(users));
     // setcookies("Email",user.Email)
