@@ -10,33 +10,61 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <h2>Movie</h2>
-            </a>
-            <div>
-                <button id="signin" class="btn btn-secondry text-white" >Sign In</button>
-                <button id="signup" class="btn btn-secondry text-white" >Create Account</button>
-            </div>
-           
-        </div>
 
+    <nav class="navbar navbar-dark py-3  fixed-top shadow">
+        <div class="container-fluid px-5 d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold logo" href="#">Noxe</a>
+        
+            <div class="d-flex align-items-center"  id="mainNavbar">
+              
+                <div class="d-flex align-items-center  me-3 fs-5">
+                <a href="https://facebook.com" target="_blank" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com" target="_blank" class="text-white mx-3"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com" target="_blank" class="text-white"><i class="fab fa-youtube"></i></a>
+                </div>
+                <div class=" d-flex align-items-center  me-3 ">
+                    <button id="signup" class="btn btn-secondary text-white border border-1 mx-2" >Create Account</button>
+                </div>
+             
+            </div>
+        </div>
     </nav>
+    
+
+     <!-- <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="500">
+          <img src="imgs/Home2.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="500">
+          <img src="imgs/Home3.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-bs-interval="500">
+          <img src="imgs/Home4.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+    </div> 
+      -->
+
+
+
+
+
+
     <div class="container p-4 col-lg-6 col-md-8 col-12 d-flex justify-content-center align-items-center min-vh-100">
         <form class="row g-3 needs-validation" novalidate>
             <div class="col-12">
               <label for="validationCustom01" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" placeholder="email" required>
-              <div class="invalid-feedback">
-                Email not valid!
+              <input type="email" class="form-control" id="email" placeholder="email" required>
+              <div class=" d-none  text-danger" id="email-invalid">
+                Enter Your Email!
               </div>
             </div>
             <div class="col-12">
               <label for="validationCustom02" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" placeholder="Password" required>
-              <div class="invalid-feedback">
-                Password not valid!
+              <div class=" d-none text-danger" id="pass-invalid">
+                Enter Your password!
               </div>
             </div>
 

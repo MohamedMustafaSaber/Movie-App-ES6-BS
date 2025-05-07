@@ -1,40 +1,65 @@
-@import url('./variables.css');
-*{
-    margin: 0;
-    padding: 0;
-}
+
+
+@import url('variables.css'); 
+
 body{
-    
+    margin: 0;
+    font-family: var(--main-font);
     background-color: var(--bg-color);
     color: var(--font-color);
-    font-family: var(--main-font);
-    overflow-y: auto;
-   
+    padding-top: 80px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+/* NavBar Part */
 nav{
-    background: var(--bg-color);
+    background-color: #12131c;
 }
 
-/* 
-.carousel-container {
+.logo {
+    color: var(--bg-transparent);
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+nav a {
+    color: var(--font-color);
+    text-decoration: none;
+    transition: all 1s ease;
+    padding: 5px 0;
     position: relative;
+    transition: all 0.5s ease;
 }
 
+nav a:hover {
+    color: var(--light-bg-color) !important;
+}
 
-.fixed-content {
+nav a::after {
+    content: '';
     position: absolute;
-    top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%); 
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 10px;
-    width: 80%; 
-    text-align: center;
-    z-index: 10;
+    width: 0;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--light-bg-color);
+    transition: width 0.8s ease;
 }
 
-.carousel-inner img {
-    /* object-fit: cover;  */
-/* } */ 
+nav a:hover::after {
+    width: 100%;
+}
+
+
+logoutBtn{
+    color: var(--font-color);
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.logoutBtn:hover {
+    color: rgb(244, 82, 82) !important;
+}

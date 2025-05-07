@@ -1,27 +1,48 @@
 let btnLogin=document.getElementById("login");
 let formValidation=document.querySelector("form");
 let email=document.getElementById("email");
+let passValid=document.getElementById("pass-invalid");
+let emailValid=document.getElementById("email-invalid");
 let password=document.getElementById("password");
 let invalidMsg=document.getElementById("invalid-inputs");
+let signupBtn=document.getElementById("signup");
 
-console.log(email)
-console.log(password)
+
+
+
+signupBtn.addEventListener("click",()=>{
+    window.location.href="registration.html"
+})
 
 formValidation.addEventListener("submit",validation);
 
 function validation(e)
 {
+    e.preventDefault()
     if (!formValidation.checkValidity()) 
     {
-        e.preventDefault()
+        if(!email.value)
+        {
+            console.log(email.value)
+            emailValid.classList.remove("d-none");
+        }
+        else if(email.value)
+            emailValid.classList.add("d-none");
+
+        if(!password.value)
+            passValid.classList.remove("d-none");
+        else if(password.value)
+            passValid.classList.add("d-none");
+
         e.stopPropagation()
     }
     else
     {
-        e.preventDefault()
+        passValid.classList.add("d-none");
+        emailValid.classList.add("d-none");
         UserAuthantication()
     }
-    formValidation.classList.add("was-validated");
+    // formValidation.classList.add("was-validated");
 
    
 
@@ -30,13 +51,14 @@ function validation(e)
 function UserAuthantication()
 {
 
-    let tempUsers=JSON.parse(localStorage.getItem("Users")||[]);
+    let tempUsers=JSON.parse(localStorage.getItem("Users")||"[]");
     let found=false;
    for(let user of  tempUsers)
     {
         if(user.Email==email.value && user.Password==password.value)
         {
-            setcookies("Email",user.Email)
+            // setcookies("Email",user.Email)
+            sessionStorage.setItem("CurrentUser",JSON.stringify(user))
             found=true;
             window.location.href="Home.html";
         }
